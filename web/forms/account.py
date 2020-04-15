@@ -14,8 +14,9 @@ class RegisterModelForm(forms.ModelForm):
         model = models.UserInfo
         fields = ['username', 'email', 'password', 'confirm_password', 'mobile_phone', 'code']
 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            for name, field in self.fields.items():
-                field.widget.attrs['class'] = 'form-control'
-                field.widget.attrs['placeholder'] = '请输入%s' % (field.label, )
+    # 智商税啊啊啊啊，这里的def在第一个class的里面，不是第二个的里面啊啊啊啊啊
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['placeholder'] = '请输入%s' % (field.label, )

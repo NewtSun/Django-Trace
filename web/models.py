@@ -6,8 +6,3 @@ class UserInfo(models.Model):
     email = models.EmailField(verbose_name='邮箱', max_length=32)
     mobile_phone = models.CharField(verbose_name='手机号', max_length=32)
     password = models.CharField(verbose_name='密码', max_length=32)
-
-    # price_policy = models.ForeignKey(verbose_name='价格策略', to='PricePolicy', null=True, blank=True)
-
-    def __str__(self):
-        return self.username
