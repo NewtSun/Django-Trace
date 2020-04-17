@@ -4,7 +4,7 @@
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import render
-from web.forms.account import RegisterModelForm, SendSmsForm
+from web.forms.account import RegisterModelForm, SendSmsForm, LoginSMSForm
 
 
 def register(request):
@@ -31,4 +31,19 @@ def send_sms(request):
         # 写Redis
         return JsonResponse({'status': True})
     # ValidationError会把只要校验不通过的信息都放在form.error里面
+    return JsonResponse({'status': False, 'error': form.errors})
+
+
+def login_sms(request):
+    """短信登录"""
+    if request.method == 'GET':
+        form = LoginSMSForm()
+        return render(request, 'lgoin_sms.html', {'form': form})
+    form = LoginSMSForm()
+    if form.is_valid(data=request.POST):
+        # 用户输入正确，登录成功（这样的话少做一个查询）
+        user_object = form.cleaned_data['mobile_phone']
+        # 用户信息写入session
+        print(user_object)
+        return JsonResponse({'status': True, 'data': '/index/'})
     return JsonResponse({'status': False, 'error': form.errors})
