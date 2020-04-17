@@ -58,6 +58,7 @@
     // 页面框架加载完成之后自动执行函数
         $(function () {
             bindClickBtnSms();
+            bindClickBtnSubmit()
         });
         /* 点击获取验证码的按钮绑定事件 */
         function bindClickBtnSms() {
@@ -87,6 +88,31 @@
                             })
                         }
                         console.log(res)
+                    }
+                })
+            })
+        }
+
+        /* 点击提交（注册） */
+
+        function bindClickBtnSubmit() {
+            $('#btnSubmit').click(function () {
+                $('.error-msg').empty();
+                // 收集表单中的数据（找到每一个字段）$('#regForm').serialize()
+                // 数据ajax发到后台
+                $.ajax({
+                    url: "{% url 'register' %}",
+                    type: "POST",
+                    data: $('#regForm').serialize(),
+                    dataType: "JSON",
+                    success: function (res) {
+                        if(res.status){
+                            location.href = res.data;
+                        }else{
+                            $.each(res.error, function (key, value) {
+                                $("#id_"+key).next().text(value[0]);
+                            })
+                        }
                     }
                 })
             })

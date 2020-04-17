@@ -8,8 +8,16 @@ from web.forms.account import RegisterModelForm, SendSmsForm
 
 
 def register(request):
-    form = RegisterModelForm()
-    return render(request, 'register.html', {'form': form})
+    """注册"""
+    if request.method == "GET":
+        form = RegisterModelForm()
+        return render(request, 'register.html', {'form': form})
+    form = RegisterModelForm(data=request.POST)
+    if form.is_valid():
+        # 验证通过 写入数据库
+        form.save()
+        return JsonResponse({'status': True, 'data': '/login/'})
+    return JsonResponse({'status': False, 'error': form.errors})
 
 
 def send_sms(request):
