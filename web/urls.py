@@ -1,6 +1,7 @@
 from django.urls import path
 from web.views import account
 from web.views import home
+from web.views import project
 
 urlpatterns = [
     # 加name方便反向解析
@@ -11,4 +12,6 @@ urlpatterns = [
     path('send/sms/', account.send_sms, name='send_sms'),
     path('index/', home.index, name='index'),
     path('logout/', account.logout, name='logout'),
+
+    path('project/list', project.project_list, name='project_list')
 ]

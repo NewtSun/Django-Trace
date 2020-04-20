@@ -139,6 +139,17 @@ TENCENT_SMS_TEMPLATE = {
     'login': 577946
 }
 
+# ########### 登录白名单：无需登录就可以访问的页面 ###########
+WHITE_REGEX_URL_LIST = [
+    "/register/",
+    "/send/sms/",
+    "/login/",
+    "/login/sms/",
+    "/image/code/",
+    "/index/",
+    "/price/",
+]
+
 TENCENT_COS_ID = "COS的secret_id"
 TENCENT_COS_KEY = "COS的secret_key"
 
