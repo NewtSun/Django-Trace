@@ -13,5 +13,7 @@ urlpatterns = [
     path('index/', home.index, name='index'),
     path('logout/', account.logout, name='logout'),
 
-    path('project/list', project.project_list, name='project_list')
+    path('project/list', project.project_list, name='project_list'),
+    path('project/star/(?P<project_type>)/(?P<project_id>)/', project.project_star, name='project_star'),
+    path('project/unstar/(?P<project_type>)/(?P<project_id>)/', project.project_unstar, name='project_unstar'),
 ]
