@@ -3,6 +3,7 @@ from web.views import account
 from web.views import home
 from web.views import project
 from web.views import manage
+from web.views import wiki
 
 urlpatterns = [
     # 加name方便反向解析
@@ -19,11 +20,16 @@ urlpatterns = [
     path('project/unstar/<project_type>/<project_id>/', project.project_unstar, name='project_unstar'),
 
     path('manage/<project_id>/', include([
+        path('wiki/', wiki.wiki, name='wiki'),
+        path('wiki/add/', wiki.wiki_add, name="wiki_add"),
+        path('wiki/catalog/', wiki.wiki_catalog, name="wiki_catalog"),
+        path('wiki/delete/<wiki_id>/', wiki.wiki_delete, name="wiki_delete"),
+        path('wiki/edit/<wiki_id>/', wiki.wiki_edit, name="wiki_edit"),
+
         path('dashboard/', manage.dashboard, name='project.dashboard'),
         path('issues/', manage.issues, name='project.issues'),
         path('statistics/', manage.statistics, name='project.statistics'),
         path('file/', manage.file, name='project.file'),
-        path('wiki/', manage.wiki, name='project.wiki'),
         path('setting/', manage.setting, name='project.setting'),
     ]))
 ]
